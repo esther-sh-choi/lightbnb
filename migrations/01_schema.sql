@@ -29,7 +29,7 @@ CREATE TABLE properties (
   province VARCHAR(255) NOT NULL,
   post_code VARCHAR(255) NOT NULL,
 
-  isActive BOOLEAN NOT NULL DEFAULT TRUE
+  active BOOLEAN NOT NULL DEFAULT TRUE
 );
 
 CREATE TABLE reservations (
