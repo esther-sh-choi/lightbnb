@@ -39,6 +39,7 @@ module.exports = function (router, database) {
 
   router.post("/reservations", (req, res) => {
     const userId = req.session.userId;
+
     database
       .submitReservation({ guest_id: userId, ...req.body })
       .then((reservations) => {

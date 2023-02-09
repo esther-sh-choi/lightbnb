@@ -48,7 +48,7 @@ $(() => {
     propertyListings.clearListings();
     getAllReservations()
       .then(function (json) {
-        propertyListings.addProperties(json.reservations);
+        propertyListings.addProperties(json.reservations, false, true);
         views_manager.show("listings");
       })
       .catch((error) => console.error(error));
