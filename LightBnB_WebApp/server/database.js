@@ -140,28 +140,28 @@ const getAllProperties = function (options, limit = 10) {
 
   if (options.minimum_price_per_night && options.maximum_price_per_night) {
     queryParams.push(
-      options.minimum_price_per_night,
-      options.maximum_price_per_night
+      options.minimum_price_per_night * 100,
+      options.maximum_price_per_night * 100
     );
     queryString += queryParams.length > 1 ? "AND " : "WHERE ";
-    queryString += `cost_per_night >= Number($${
+    queryString += `cost_per_night >= $${
       queryParams.length - 1
-    }) * 100 AND cost_per_night <= Number($${queryParams.length}) * 100 `;
+    } AND cost_per_night <= $${queryParams.length} `;
   } else if (options.minimum_price_per_night) {
-    queryParams.push(options.minimum_price_per_night);
+    queryParams.push(options.minimum_price_per_night * 100);
     queryString += queryParams.length > 1 ? "AND " : "WHERE ";
-    queryString += `cost_per_night >= Number($${queryParams.length}) * 100 `;
+    queryString += `cost_per_night >= $${queryParams.length} `;
   } else if (options.maximum_price_per_night) {
-    queryParams.push(options.maximum_price_per_night);
+    queryParams.push(options.maximum_price_per_night * 100);
     queryString += queryParams.length > 1 ? "AND " : "WHERE ";
-    queryString += `cost_per_night <= Number($${queryParams.length}) * 100 `;
+    queryString += `cost_per_night <= $${queryParams.length} `;
   }
 
   queryString += `GROUP BY properties.id `;
 
   if (options.minimum_rating) {
     queryParams.push(options.minimum_rating);
-    queryString += `HAVING avg(property_reviews.rating) >= Number($${queryParams.length})`;
+    queryString += `HAVING avg(property_reviews.rating) >= $${queryParams.length}`;
   }
 
   queryParams.push(limit);
