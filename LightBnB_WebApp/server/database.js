@@ -25,8 +25,8 @@ const getUserWithEmail = function (email) {
       [email]
     )
     .then((result) => {
-      console.log(result.rows);
-      return result.rows;
+      console.log(result.rows[0]);
+      return result.rows[0];
     })
     .catch((err) => {
       console.log(err.message);
@@ -49,8 +49,8 @@ const getUserWithId = function (id) {
       [id]
     )
     .then((result) => {
-      console.log(result.rows);
-      return result.rows;
+      console.log(result.rows[0]);
+      return result.rows[0];
     })
     .catch((err) => {
       console.log(err.message);
@@ -64,7 +64,8 @@ exports.getUserWithId = getUserWithId;
  * @param {{name: string, password: string, email: string}} user
  * @return {Promise<{}>} A promise to the user.
  */
-const addUser = function (name, email, password) {
+const addUser = function (user) {
+  const { name, email, password } = user;
   return pool
     .query(
       `INSERT INTO users (name, email, password)
@@ -78,7 +79,6 @@ const addUser = function (name, email, password) {
     })
     .catch((err) => {
       console.log(err.message);
-      return null;
     });
 };
 exports.addUser = addUser;
