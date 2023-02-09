@@ -1,5 +1,4 @@
 $(() => {
-
   const $propertyListings = $(`
   <section class="property-listings" id="property-listings">
       <p>Loading...</p>
@@ -26,5 +25,4 @@ $(() => {
     }
   }
   window.propertyListings.addProperties = addProperties;
-
 });
