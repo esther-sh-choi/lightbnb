@@ -41,13 +41,11 @@
   margin: 0;
 }
 
-.property-listing__details form {
-  padding: 10px 0;
-}
-
 .reservation-form__field-wrapper {
   display: flex;
   justify-content: space-between;
+  width: 200px;
+  margin-bottom: 5px;
 }
 
 @media screen and (max-width: 400px) {

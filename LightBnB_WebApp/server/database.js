@@ -108,6 +108,32 @@ const getAllReservations = function (guest_id, limit = 10) {
 };
 exports.getAllReservations = getAllReservations;
 
+/**
+ * Submit reservation for a single user.
+ * @param {string} guest_id The id of the user.
+ * @return {Promise<[{}]>} A promise to the reservations.
+ */
+const submitReservation = function (data) {
+  const { guest_id, property_id, start_date, end_date } = data;
+  return pool
+    .query(
+      `
+    INSERT INTO reservations (start_date, end_date, property_id, guest_id)
+    VALUES ($1, $2, $3, $4)
+    RETURNING *;
+  `,
+      [start_date, end_date, property_id, guest_id]
+    )
+    .then((result) => {
+      console.log(result.rows);
+      return result.rows;
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+exports.submitReservation = submitReservation;
+
 /// Properties
 
 /**

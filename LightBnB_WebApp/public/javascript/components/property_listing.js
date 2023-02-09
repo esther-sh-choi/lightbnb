@@ -1,7 +1,7 @@
 $(() => {
   window.propertyListing = {};
-  let isStartReservation = false;
-  function createListing(property, isReservation) {
+
+  function createListing(property, isReserveForm, isReservation) {
     return `
     <article class="property-listing">
         <section class="property-listing__preview-image">
@@ -30,23 +30,24 @@ $(() => {
             }/night</div>
           </footer>
           ${
-            isStartReservation
-              ? `<button id='${property.id}' class="start-reservation-button">Make Reservation</button>`
-              : `
-          <form>
-            <div class="reservation-form__field-wrapper">
-              <label for='start_date'>Start Date:</label>
-              <input type='date' name='start_date' />
-            </div>
-            <div class="reservation-form__field-wrapper">
-              <label for='end_date'>End Date:</label>
-              <input type='date' name='end_date' />
-            </div>
-            <button type='submit'>Submit</button>
-          </form>`
+            isReserveForm
+              ? `<form name='${property.id}_reservation-form' class="reservation-form">
+              <div class="reservation-form__field-wrapper">
+                <label for='start_date'>Start Date:</label>
+                <input type='date' name='start_date' />
+              </div>
+              <div class="reservation-form__field-wrapper">
+                <label for='end_date'>End Date:</label>
+                <input type='date' name='end_date' />
+              </div>
+              <input type='hidden' name='property_id' value="${property.id}" />
+              <button type='submit' class="start-reservation-button">Make Reservation</button>
+            </form>`
+              : ``
           }
         </section>
       </article>
+      
     `;
   }
 
